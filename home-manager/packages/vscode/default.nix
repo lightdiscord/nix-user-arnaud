@@ -1,14 +1,14 @@
 {
-    rustSupport ? false,
+	rustSupport ? false,
 	...
 }:
 
 let
-    dependencies = {
-        nixpkgs = import ../../../dependencies/nixpkgs.nix { };
-    };
+	dependencies = {
+		nixpkgs = import ../../../dependencies/nixpkgs.nix {builtins.fetchgit };
+	};
 
-    inherit (dependencies.nixpkgs) vscode-with-extensions vscode-utils lib;
+	inherit (dependencies.nixpkgs) vscode-with-extensions vscode-utils lib;
 
 	extensions' = import ./extensions.nix;
 	extensions = with extensions'; [

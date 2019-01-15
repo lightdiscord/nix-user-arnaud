@@ -1,76 +1,76 @@
 { config, ... }:
 
-let 
-    dependencies = {
-        nixpkgs = import ../dependencies/nixpkgs.nix { };
-        awesome = import ../dependencies/awesome.nix;
-    };
+let
+	dependencies = {
+		nixpkgs = import ../dependencies/nixpkgs.nix { };
+		awesome = import ../dependencies/awesome.nix;
+	};
 
-    informations = import ../informations.nix;
+	informations = import ../informations.nix;
 in {
-    imports = [
-        dependencies.awesome.home-manager
-    ];
+	imports = [
+		dependencies.awesome.home-manager
+	];
 
-    home.packages = import ./packages { inherit config; };
-    xsession.windowManager.awesome.enable = config.xsession.enable;
-    services.compton.enable = config.xsession.enable;
+	home.packages = import ./packages { inherit config; };
+	xsession.windowManager.awesome.enable = config.xsession.enable;
+	services.compton.enable = config.xsession.enable;
 
-    nixpkgs.config.allowUnfree = true;
-    manual.manpages.enable = true;
+	nixpkgs.config.allowUnfree = true;
+	manual.manpages.enable = true;
 
-    services.gnome-keyring = {
-        enable = true;
-        components = ["secrets" "pkcs11" "ssh"];
-    };
+	services.gnome-keyring = {
+		enable = true;
+		components = ["secrets" "pkcs11" "ssh"];
+	};
 
-    services.redshift = {
-        # TODO: Location based on machine location or using system time.
+	services.redshift = {
+		# TODO: Location based on machine location or using system time.
 		latitude = "43.643116";
 		longitude = "6.875682";
 
 		inherit (config.xsession) enable;
-    };
+	};
 
-    programs.git = {
-        enable = true;
-        userEmail = informations.email;
-        userName = informations.nickname;
-        
-        signing = {
-            signByDefault = true;
-            key = informations.keys.gpg;
-        };
+	programs.git = {
+		enable = true;
+		userEmail = informations.email;
+		userName = informations.nickname;
 
-        # TODO: Use the code package here or simply use the EDITOR variable.
-        extraConfig = ''
-            [core]
-            editor=code --wait
-        '';
-    };
+		signing = {
+			signByDefault = true;
+			key = informations.keys.gpg;
+		};
 
-    services.gpg-agent = {
-        enable = true;
-        enableSshSupport = true;
-        defaultCacheTtl = 60;
-    };
+		# TODO: Use the code package here or simply use the EDITOR variable.
+		extraConfig = ''
+			[core]
+			editor=code --wait
+		'';
+	};
 
-    gtk = {
-        enable = true;
+	services.gpg-agent = {
+		enable = true;
+		enableSshSupport = true;
+		defaultCacheTtl = 60;
+	};
 
-        theme = {
-            package = dependencies.nixpkgs.arc-theme;
-            name = "Arc-Dark";
-        };
+	gtk = {
+		enable = true;
 
-        iconTheme = {
-            package = dependencies.nixpkgs.papirus-icon-theme;
-            name = "Papirus";
-        };
-    };
+		theme = {
+			package = dependencies.nixpkgs.arc-theme;
+			name = "Arc-Dark";
+		};
 
-    qt = {
-        enable = true;
-        useGtkTheme = true;
-    };
+		iconTheme = {
+			package = dependencies.nixpkgs.papirus-icon-theme;
+			name = "Papirus";
+		};
+	};
+
+	qt = {
+		enable = true;
+		useGtkTheme = true;
+	};
 }

@@ -1,52 +1,52 @@
 { config }:
 
 let
-    dependencies = {
-        nixpkgs = import ../../dependencies/nixpkgs.nix { };
-        neovim = import ../../dependencies/neovim.nix;
-    };
+	dependencies = {
+		nixpkgs = import ../../dependencies/nixpkgs.nix { };
+		neovim = import ../../dependencies/neovim.nix;
+	};
 
-    inherit (dependencies) nixpkgs;
+	inherit (dependencies) nixpkgs;
 
-    rustSupport = nixpkgs.lib.any 
-        (package: package == nixpkgs.rustup) 
-        config.home.packages;
+	rustSupport = nixpkgs.lib.any
+		(package: package == nixpkgs.rustup)
+		config.home.packages;
 
-    neovim = nixpkgs.callPackage dependencies.neovim { };
+	neovim = nixpkgs.callPackage dependencies.neovim { };
 
 in with nixpkgs.lib; [
-    nixpkgs.psmisc
-    nixpkgs.tmate
-    nixpkgs.gcc
-    nixpkgs.gnumake
-    nixpkgs.rustup
-    nixpkgs.neomutt
-    nixpkgs.htop
-    nixpkgs.bat
-    nixpkgs.taskwarrior
-    nixpkgs.pinentry
-    nixpkgs.neomutt
-    nixpkgs.protonmail-bridge
-    nixpkgs.ponysay
-    nixpkgs.upower
-    nixpkgs.acpi
-    nixpkgs.exa
-    nixpkgs.gnome3.dconf
-    neovim
+	nixpkgs.psmisc
+	nixpkgs.tmate
+	nixpkgs.gcc
+	nixpkgs.gnumake
+	nixpkgs.rustup
+	nixpkgs.neomutt
+	nixpkgs.htop
+	nixpkgs.bat
+	nixpkgs.taskwarrior
+	nixpkgs.pinentry
+	nixpkgs.neomutt
+	nixpkgs.protonmail-bridge
+	nixpkgs.ponysay
+	nixpkgs.upower
+	nixpkgs.acpi
+	nixpkgs.exa
+	nixpkgs.gnome3.dconf
+	neovim
 ] ++ optionals config.xsession.enable [
-    nixpkgs.discord
-    nixpkgs.pavucontrol
-    nixpkgs.google-chrome
-    nixpkgs.feh
-    nixpkgs.xsel
-    nixpkgs.xclip
-    nixpkgs.shutter
-    nixpkgs.thunderbird
-    nixpkgs.kitty
-    nixpkgs.libreoffice
-    nixpkgs.arduino
-    nixpkgs.dolphin
-    (nixpkgs.callPackage ./vscode {
-        inherit rustSupport;
-    })
+	nixpkgs.discord
+	nixpkgs.pavucontrol
+	nixpkgs.google-chrome
+	nixpkgs.feh
+	nixpkgs.xsel
+	nixpkgs.xclip
+	nixpkgs.shutter
+	nixpkgs.thunderbird
+	nixpkgs.kitty
+	nixpkgs.libreoffice
+	nixpkgs.arduino
+	nixpkgs.dolphin
+	(nixpkgs.callPackage ./vscode {
+		inherit rustSupport;
+	})
 ]
