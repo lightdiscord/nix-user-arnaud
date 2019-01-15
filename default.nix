@@ -22,11 +22,14 @@ in with lib; {
 	hashedPassword = import ./hashed-password.nix;
 	openssh.authorizedKeys.keys = [ informations.keys.ssh ];
 	shell = dependencies.nixpkgs.fish;
+
+	# TODO: Find a better way to add groups and add all of them.
+	# ["wheel" "networkmanager" "audio" "git" "docker" "vboxusers" "scanner" "lp" "dialout"]
+
 	extraGroups = []
 		++ optionals isAdmin ["wheel"]
 		++ optional (groupExists "dialout" && isAdmin) "dialout"
 		++ addIfExists "lp"
-		++ addIfExists "git"
 		++ addIfExists "git"
 		++ addIfExists "docker";
 }
