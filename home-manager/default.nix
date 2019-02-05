@@ -7,9 +7,12 @@ let
 	};
 
 	informations = import ../informations.nix;
+
+	inherit (dependencies) nixpkgs;
 in {
 	imports = [
 		dependencies.awesome.home-manager
+		./packages/vscode/link-extensions.nix
 	];
 
 	home.packages = import ./packages { inherit config; };
@@ -59,12 +62,12 @@ in {
 		enable = true;
 
 		theme = {
-			package = dependencies.nixpkgs.arc-theme;
+			package = nixpkgs.arc-theme;
 			name = "Arc-Dark";
 		};
 
 		iconTheme = {
-			package = dependencies.nixpkgs.papirus-icon-theme;
+			package = nixpkgs.papirus-icon-theme;
 			name = "Papirus";
 		};
 	};

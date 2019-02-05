@@ -3,5 +3,6 @@
 lint:
 	npx eclint check '**/*.nix'
 
-fix-lint: lint
+fix-lint:
 	npx eclint fix '**/*.nix'
+	npx eclint check '**/*.nix'

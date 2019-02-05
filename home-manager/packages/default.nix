@@ -8,10 +8,6 @@ let
 
 	inherit (dependencies) nixpkgs;
 
-	rustSupport = nixpkgs.lib.any
-		(package: package == nixpkgs.rustup)
-		config.home.packages;
-
 	neovim = nixpkgs.callPackage dependencies.neovim { };
 
 in with nixpkgs.lib; [
@@ -46,7 +42,5 @@ in with nixpkgs.lib; [
 	nixpkgs.libreoffice
 	nixpkgs.arduino
 	nixpkgs.dolphin
-	(nixpkgs.callPackage ./vscode {
-		inherit rustSupport;
-	})
+	nixpkgs.vscode
 ]
