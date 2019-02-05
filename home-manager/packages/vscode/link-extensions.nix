@@ -11,8 +11,8 @@ let
 	extensionFilename = { publisher, name, version, ... }:
 		".vscode/extensions/${publisher}.${name}-${version}";
 
-	mapExtension = extension: {
+	mapExtension = extension@{ publisher, name, ... }: {
 		home.file.${extensionFilename extension}.source =
-			extensionFromVscodeMarketplace extension;
+			"${extensionFromVscodeMarketplace extension}/share/vscode/extensions/${publisher}.${name}";
 	};
 in mkMerge (map mapExtension extensions)
