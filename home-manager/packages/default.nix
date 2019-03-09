@@ -15,7 +15,7 @@ in with nixpkgs.lib; [
 	nixpkgs.tmate
 	nixpkgs.gcc
 	nixpkgs.gnumake
-	nixpkgs.rustup
+	# nixpkgs.rustup
 	nixpkgs.neomutt
 	nixpkgs.htop
 	nixpkgs.bat
@@ -26,7 +26,7 @@ in with nixpkgs.lib; [
 	nixpkgs.ponysay
 	nixpkgs.upower
 	nixpkgs.acpi
-	nixpkgs.exa
+	# nixpkgs.exa
 	nixpkgs.gnome3.dconf
 	neovim
 ] ++ optionals config.xsession.enable [

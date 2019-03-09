@@ -2,6 +2,6 @@ let
 	expression = builtins.tryEval <awesome>;
 	fallback = builtins.fetchGit {
 		url = "git@github.com:lightdiscord/Awesome.git";
-		rev = "958102c1b20b95a7cb3e8b3921c659b8da9bd06d";
+		rev = "8258c1523bab3be48bf759c96901037c038117e7";
 	};
 in import (if expression.success then expression.value else fallback)

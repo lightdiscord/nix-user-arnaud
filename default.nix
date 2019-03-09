@@ -24,12 +24,12 @@ in with lib; {
 	shell = dependencies.nixpkgs.fish;
 
 	# TODO: Find a better way to add groups and add all of them.
-	# ["wheel" "networkmanager" "audio" "git" "docker" "vboxusers" "scanner" "lp" "dialout"]
+	extraGroups = ["wheel" "networkmanager" "audio" "git" "docker" "vboxusers" "scanner" "lp" "dialout"];
 
-	extraGroups = []
-		++ optionals isAdmin ["wheel"]
-		++ optional (groupExists "dialout" && isAdmin) "dialout"
-		++ addIfExists "lp"
-		++ addIfExists "git"
-		++ addIfExists "docker";
+	# extraGroups = []
+	# 	++ optionals isAdmin ["wheel"]
+	# 	++ optional (groupExists "dialout" && isAdmin) "dialout"
+	# 	++ addIfExists "lp"
+	# 	++ addIfExists "git"
+	# 	++ addIfExists "docker";
 }
